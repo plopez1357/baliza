@@ -7,7 +7,6 @@
 Led yellowLed(19);
 Led greenLed(21);*/
 Led orangeLed(18); //fallo coneccion WIFI
-
 WiFiConnection wifiConnecion;
 APIService apiService;
 

@@ -46,7 +46,10 @@ String APIService::getState()
       JsonObject& root = jsonBuffer.parseObject(json);
       String status = root["builds"][0]["state"];  
       _state = status;
+      Serial.println(status);
       return _state;
+      Serial.println(_state);
+      
     }else
     {
       return "Code:" + httpCode;
