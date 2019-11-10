@@ -6,12 +6,14 @@
 class APIService
 {
     public:
-        APIService(String urlOfBuild, String authorizationToken);
-        void connectToAPI();
-        void getStatus();
+        APIService();
+        void connectToAPI(String urlOfBuild, String authorizationToken);
+        String getState();
+        void activateLed();
     private:
-        String _urlOfBuild;
-        String _authorizationToken;
+        String _state; 
+       //String _urlOfBuild;
+       //String _authorizationToken;
 };
 
 #endif

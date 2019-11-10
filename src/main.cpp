@@ -3,18 +3,17 @@
 #include <WiFiConnection.h>
 #include <APIService.h>
 
-Led redLed(5);
+/*Led redLed(5);
 Led yellowLed(19);
-Led greenLed(21);
-Led orangeLed(16);
+Led greenLed(21);*/
+Led orangeLed(18); //fallo coneccion WIFI
 
 WiFiConnection wifiConnecion;
-APIService apiService("https://api.travis-ci.com", "SJKuP9WgGz-KLCb5B5MDdw");
+APIService apiService;
 
 void setup()
 {
   Serial.begin(9600);
-  //Serial.println("test1");
   wifiConnecion.wifiSetup();
 }
 
@@ -22,15 +21,14 @@ void loop()
 {
   if (WiFi.status() == WL_CONNECTED)
   {
-      delay(500);
-      greenLed.blink();
-      //Serial.println("test2");
-      apiService.connectToAPI();
+      delay(1000);
+      apiService.connectToAPI("https://api.travis-ci.com", "SJKuP9WgGz-KLCb5B5MDdw");
+      apiService.getState();
+      apiService.activateLed();
       
   }else
   {
-    //Serial.println("test3");
     delay(500);
-    redLed.blink();
+    orangeLed.blink();
   }
 }
