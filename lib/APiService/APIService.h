@@ -9,11 +9,6 @@ class APIService
         APIService();
         void connectToAPI(String urlOfBuild, String authorizationToken);
         String getState();
-        void activateLed();
-    private:
-        String _state; 
-       //String _urlOfBuild;
-       //String _authorizationToken;
 };
 
 #endif

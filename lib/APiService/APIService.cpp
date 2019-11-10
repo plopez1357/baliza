@@ -2,14 +2,9 @@
 #include "Led.h"
 #include "APIService.h"
 #include <ArduinoJson.h>
-#include <WiFi.h>
-#include <WiFiMulti.h>
 #include <HTTPClient.h>
 
 HTTPClient http;
-Led redLed(5);
-Led yellowLed(19);
-Led greenLed(21);
 
 APIService::APIService()
 {
@@ -45,10 +40,8 @@ String APIService::getState()
       StaticJsonBuffer <3000> jsonBuffer;
       JsonObject& root = jsonBuffer.parseObject(json);
       String status = root["builds"][0]["state"];  
-      _state = status;
+      return status;
       Serial.println(status);
-      return _state;
-      Serial.println(_state);
       
     }else
     {
@@ -59,36 +52,10 @@ String APIService::getState()
     return http.errorToString(httpCode).c_str();
     Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
   }
-  //http.end();
+  http.end();
 }
 
-void APIService::activateLed()
-{
-  if(_state == "passed")
-  {
-    greenLed.turnOn();
-    redLed.turnOff();
-    yellowLed.turnOff();
 
-  }else if(_state == "failed")
-  {
-    greenLed.turnOff();
-    redLed.turnOn();
-    yellowLed.turnOff();
-      
-  }/*else if(_state == "errored")
-  {
-      
-      
-  }else if(_state == "started")0
-  {
-      
-      
-  }else if(_state == "canceled")
-  {
-    
-  }*/
-}
 
 
       
