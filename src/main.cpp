@@ -2,32 +2,27 @@
 #include <Led.h>
 #include <WiFiConnection.h>
 #include <APIService.h>
+#include <Baliza.h>
 
-Led redLed(5);
-Led yellowLed(19);
-Led greenLed(21);
-Led orangeLed(18); 
-
-WiFiConnection wifiConnecion;
-APIService apiService;
+Baliza baliza;
 
 void setup()
 {
   Serial.begin(9600);
-  wifiConnecion.wifiSetup();
+  baliza.setupWiFi();
 }
 
 void loop()
 {
   if (WiFi.status() == WL_CONNECTED)
   {
-      delay(1000);
-      apiService.connectToAPI("https://api.travis-ci.com", "SJKuP9WgGz-KLCb5B5MDdw");
-      apiService.getState();
-      
+    delay(1000);
+    baliza.setupAPIConeccion();
+    baliza.checkAPIStatus();
   }else
   {
     delay(500);
-    orangeLed.blink();
+    Serial.println("NO SE PUDO CONECTAR A WIFI");
+    baliza.wifiDisconnected();
   }
 }
