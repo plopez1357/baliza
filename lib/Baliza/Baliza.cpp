@@ -11,7 +11,7 @@ APIService apiService;
 Led redLed(5);
 Led yellowLed(19);
 Led greenLed(21);
-Led orangeLed(16);
+Led orangeLed(18);
 
 Baliza::Baliza()
 {  
@@ -24,16 +24,19 @@ void Baliza::setupWiFi()
 
 void Baliza::setupAPIConeccion()
 {
-    apiService.connectToAPI("https://api.travis-ci.com", "SJKuP9WgGz-KLCb5B5MDdw");
+    apiService.connectToAPI("https://api.travis-ci.org", "lnyoitp6IOciC01Dcp0Lbg");
 }
 
 void Baliza::checkAPIStatus()
-{
-    if(apiService.getState() == "passed"){
+{   //Llamo una sola vez al .getState para que no tenga problemas con la autenticación
+    String state = apiService.getState();
+
+    if(state.equals("passed")){
         this->passedBuild();
-    }else if(apiService.getState() == "failed"||apiService.getState() == "errored"||apiService.getState() == "canceled" ){
+    }else if(state.equals("failed") || state.equals("errored") || state.equals("canceled") 
+            || state.equals("created") || state.equals("started") ){
         this->failedBuild();
-    }else if(apiService.getState() != "200"){
+    }else if(state != "200"){
         this->httpConnectionError();
     }
 }

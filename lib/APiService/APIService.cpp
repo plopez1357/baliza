@@ -13,11 +13,11 @@ void APIService::connectToAPI(String urlOfBuild, String authorizationToken)
 {
   Serial.print("[HTTP] begin...\n");
   // configure traged server and url
-  http.begin(urlOfBuild + "/builds?limit=1");
+  http.begin(urlOfBuild + "/repo/26853908/builds?limit=1");
   http.addHeader("Travis-API-Version","3");
   http.addHeader("User-Agent","API Explorer");
   http.addHeader("Authorization","token " + authorizationToken);
-}        
+}       
 
 String APIService::getState()
 {
@@ -30,13 +30,14 @@ String APIService::getState()
     if(httpCode == HTTP_CODE_OK){
       // get the value of "state"
       String json = http.getString();
-      StaticJsonBuffer <3000> jsonBuffer;
+      StaticJsonBuffer <4000> jsonBuffer;
       JsonObject& root = jsonBuffer.parseObject(json);
       String status = root["builds"][0]["state"];  
       Serial.println(status);
       return status;
     }else{
       return ""+httpCode;
+      Serial.println(httpCode);
     } 
   }else{
     Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
