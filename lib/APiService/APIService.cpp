@@ -1,6 +1,5 @@
-#include "Arduino.h"
-#include "Led.h"
-#include "APIService.h"
+#include <Arduino.h>
+#include <APIService.h>
 #include <ArduinoJson.h>
 #include <HTTPClient.h>
 
@@ -12,45 +11,47 @@ APIService::APIService()
 
 void APIService::connectToAPI(String urlOfBuild, String authorizationToken)
 {
-  Serial.print("[HTTP] begin...\n");
+  _urlOfBuild = urlOfBuild;
+  _authorizationToken = authorizationToken;
+}
 
+void APIService::setHeader()
+{
+  Serial.print("[HTTP] begin...\n");
   // configure traged server and url
-  http.begin(urlOfBuild + "/builds?limit=1");
+  // 26882066 jorocha
+  // 26853908 plopez1357
+  http.begin(_urlOfBuild + "/repo/26853908/builds?limit=1");
   http.addHeader("Travis-API-Version","3");
   http.addHeader("User-Agent","API Explorer");
-  http.addHeader("Authorization","token " + authorizationToken);
-}        
+  http.addHeader("Authorization","token " + _authorizationToken);
+}  
 
 String APIService::getState()
 {
-  //String state;
-  Serial.print("[HTTP] GET...\n");
+  setHeader();
   // start connection and send HTTP header
   int httpCode = http.GET();
   // httpCode will be negative on error
-  if(httpCode > 0)
-  {
-    // HTTP header has been send and Server response header has been handled
+  if(httpCode > 0){
     Serial.printf("[HTTP] GET... code: %d\n", httpCode);
-      // file found at server
-
-    if(httpCode == HTTP_CODE_OK )
-    {
+    // file found at server
+    if(httpCode == HTTP_CODE_OK){
+      // get the value of "state"
       String json = http.getString();
-      StaticJsonBuffer <3000> jsonBuffer;
+      StaticJsonBuffer <4000> jsonBuffer;
       JsonObject& root = jsonBuffer.parseObject(json);
       String status = root["builds"][0]["state"];  
-      return status;
       Serial.println(status);
-      
-    }else
-    {
-      return "Code:" + httpCode;
+      return status;
+    }else{
+      // connection error 4XX
+      String stringHttpCode = String(httpCode).substring(0,1) + "XX";
+      return stringHttpCode;
     } 
-  }else 
-  {
-    return http.errorToString(httpCode).c_str();
+  }else{
     Serial.printf("[HTTP] GET... failed, error: %s\n", http.errorToString(httpCode).c_str());
+    return http.errorToString(httpCode).c_str();
   }
   http.end();
 }

@@ -20,7 +20,35 @@ void Led::turnOff()
 void Led::blink() 
 {
   digitalWrite (_pin, HIGH);
-  delay(400);
+  delay(200);
   digitalWrite (_pin, LOW);
-  delay(400);
+  delay(200);
+  digitalWrite (_pin, HIGH);
+  delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
+  digitalWrite (_pin, HIGH);
+  delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
+  digitalWrite (_pin, HIGH);
+  delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
+  digitalWrite (_pin, HIGH);
+  delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
+  digitalWrite (_pin, HIGH);
+  delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
+  digitalWrite (_pin, HIGH);
+  delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
 }
