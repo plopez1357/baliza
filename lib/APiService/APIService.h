@@ -9,6 +9,10 @@ class APIService
         APIService();
         void connectToAPI(String urlOfBuild, String authorizationToken);
         String getState();
+    private:
+        String _urlOfBuild;
+        String _authorizationToken;
+        void setHeader();   
 };
 
 #endif

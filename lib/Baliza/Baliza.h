@@ -10,13 +10,12 @@ class Baliza
         void setupWiFi();
         void setupAPIConeccion();
         void checkAPIStatus();
+        void startedBuild();
         void passedBuild();
         void failedBuild();
         void httpConnectionError();
         void wifiDisconnected();
 
-    private:
-        String _previousState = "";
 };
 
 #endif

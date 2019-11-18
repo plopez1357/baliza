@@ -28,46 +28,44 @@ void Baliza::setupAPIConeccion()
 }
 
 void Baliza::checkAPIStatus()
-{   //Llamo una sola vez al .getState para que no tenga problemas con la autenticación
+{   
     String state = apiService.getState();
 
     if(state.equals("passed")){
-        this->passedBuild();
-    }else if(state.equals("failed") || state.equals("errored") || state.equals("canceled") 
-            || state.equals("created") || state.equals("started") ){
-        this->failedBuild();
-    }else if(state != "200"){
-        this->httpConnectionError();
+        this -> passedBuild();
+    }else if(state.equals("failed") || state.equals("errored") || state.equals("canceled")){
+        this -> failedBuild();
+    }else if(state.equals("created") || state.equals("started")){
+        this -> startedBuild();
+    }else if(state.equals("4XX")){
+        this -> httpConnectionError();
     }
+}
+
+void Baliza::startedBuild() 
+{
+    greenLed.blink();
+    yellowLed.turnOff();
+    redLed.turnOff();
+    orangeLed.turnOff();
+    
 }
 
 void Baliza::passedBuild() 
 {
-    if(_previousState != "passed"){
-        greenLed.blink();
-        greenLed.blink();
-        delay(2000);
-    }
     greenLed.turnOn();
     yellowLed.turnOff();
     redLed.turnOff();
     orangeLed.turnOff();
-    _previousState = "passed";
     
 }
 
 void Baliza::failedBuild()
 {
-    if(_previousState != "failed"){
-        redLed.blink();
-        redLed.blink();
-        delay(2000);
-    }
     redLed.turnOn();
     greenLed.turnOff();
     yellowLed.turnOff();
     orangeLed.turnOff();
-    _previousState = "failed";
 }
 
 void Baliza::httpConnectionError()
@@ -76,7 +74,6 @@ void Baliza::httpConnectionError()
     redLed.turnOff();
     orangeLed.turnOff();
     yellowLed.turnOn();
-    _previousState = "httpError";
 }
 
 void Baliza::wifiDisconnected()
@@ -85,7 +82,6 @@ void Baliza::wifiDisconnected()
     redLed.turnOff();
     yellowLed.turnOff();
     orangeLed.turnOn();
-    _previousState = "wifiDisconnected";
 }
 
 
