@@ -15,7 +15,7 @@ class Baliza
         void failedBuild();
         void httpConnectionError();
         void wifiDisconnected();
-
+        void turnOffLeds();
 };
 
 #endif

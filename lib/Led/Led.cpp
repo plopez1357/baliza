@@ -39,4 +39,16 @@ void Led::blink()
   delay(200);
   digitalWrite (_pin, LOW);
   delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
+  digitalWrite (_pin, HIGH);
+  delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
+  digitalWrite (_pin, HIGH);
+  delay(200);
+  digitalWrite (_pin, LOW);
+  delay(200);
 }

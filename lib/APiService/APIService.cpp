@@ -19,6 +19,8 @@ void APIService::setHeader()
 {
   Serial.print("[HTTP] begin...\n");
   // configure traged server and url
+  // 26882066 jorocha
+  // 26853908 plopez1357
   http.begin(_urlOfBuild + "/repo/26853908/builds?limit=1");
   http.addHeader("Travis-API-Version","3");
   http.addHeader("User-Agent","API Explorer");

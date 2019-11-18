@@ -22,6 +22,8 @@ void Baliza::setupWiFi()
     wifiConnecion.wifiSetup();
 }
 
+// I9aFEbTHtAB7uCiJ0T-MTA
+// lnyoitp6IOciC01Dcp0Lbg
 void Baliza::setupAPIConeccion()
 {
     apiService.connectToAPI("https://api.travis-ci.org", "lnyoitp6IOciC01Dcp0Lbg");
@@ -32,40 +34,40 @@ void Baliza::checkAPIStatus()
     String state = apiService.getState();
 
     if(state.equals("passed")){
-        this -> passedBuild();
+        this->passedBuild();
     }else if(state.equals("failed") || state.equals("errored") || state.equals("canceled")){
-        this -> failedBuild();
+        this->failedBuild();
     }else if(state.equals("created") || state.equals("started")){
-        this -> startedBuild();
+        this->startedBuild();
     }else if(state.equals("4XX")){
-        this -> httpConnectionError();
+        this->httpConnectionError();
+    }else{
+        this->turnOffLeds();
     }
 }
 
 void Baliza::startedBuild() 
 {
-    greenLed.blink();
     yellowLed.turnOff();
     redLed.turnOff();
     orangeLed.turnOff();
-    
+    greenLed.blink();
 }
 
 void Baliza::passedBuild() 
 {
-    greenLed.turnOn();
     yellowLed.turnOff();
     redLed.turnOff();
     orangeLed.turnOff();
-    
+    greenLed.turnOn();
 }
 
 void Baliza::failedBuild()
 {
-    redLed.turnOn();
     greenLed.turnOff();
     yellowLed.turnOff();
     orangeLed.turnOff();
+    redLed.turnOn();
 }
 
 void Baliza::httpConnectionError()
@@ -84,6 +86,10 @@ void Baliza::wifiDisconnected()
     orangeLed.turnOn();
 }
 
-
-
-
+void Baliza::turnOffLeds()
+{
+    greenLed.turnOff();
+    redLed.turnOff();
+    yellowLed.turnOff();
+    orangeLed.turnOff();
+}
