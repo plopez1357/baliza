@@ -16,7 +16,7 @@ void WiFiConnection::wifiSetup()
     wifiManager.setSaveConfigCallback(this->saveConfigCallback); 
  
     // Crea una red de nombre ESP_AP con password 12345678
-    wifiManager.autoConnect("ESP_AP", "12345678"); 
+    // wifiManager.autoConnect("ESP_AP", "12345678"); 
     wifiManager.startConfigPortal("ESP32 Baliza", "baliza2019");
 }
 
@@ -29,7 +29,6 @@ void WiFiConnection::configModeCallback(WiFiManager *myWiFiManager)
 
 void WiFiConnection::saveConfigCallback() 
 {
-//  Serial.println("Should save config");
   Serial.println("Configuraçión guardada");
   Serial.println(WiFi.softAPIP()); // Imprime la IP del AP
   Serial.println("");

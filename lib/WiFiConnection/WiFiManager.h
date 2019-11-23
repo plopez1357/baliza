@@ -45,6 +45,7 @@ const char HTTP_FORM_PARAM[] PROGMEM      = "<br/><input id='{i}' name='{n}' len
 const char HTTP_FORM_END[] PROGMEM        = "<br/><button type='submit'>Guardar</button></form>";
 const char HTTP_SCAN_LINK[] PROGMEM       = "<br/><div class=\"c\"><a href=\"/wifi\">Escanear</a></div>";
 const char HTTP_SAVED[] PROGMEM           = "<div>Credenciales guardadas<br />Intentando conectar a la red<br />Si falla, reconectar al Access Point, para volver a intentarlo</div>";
+const char HTTP_FAILED[] PROGMEM          = "<div>No se logró conectar a la red, por favor vuelva a intentarlo.<br />Reiniciando dispositivo...</div>";
 const char HTTP_END[] PROGMEM             = "</div></body></html>";
 
 #define WIFI_MANAGER_MAX_PARAMS 10
