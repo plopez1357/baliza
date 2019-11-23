@@ -4,23 +4,24 @@
 #include <APIService.h>
 #include <Baliza.h>
 
-/*
+//nuevo
 #include <WiFi.h>
 #include <WiFiMulti.h>
-WiFiMulti wifiMulti;*/
+WiFiMulti wifiMulti;
 
 Baliza baliza;
 
 void setup()
 {
   Serial.begin(9600);
-  baliza.setupWiFi();
+  wifiMulti.addAP("ZULATTO WIFI", "fiber12345");
+  //baliza.setupWiFi();
 }
 
 void loop()
 {
-  if (WiFi.status() == WL_CONNECTED)
-  //if (wifiMulti.run() == WL_CONNECTED)
+  //if (WiFi.status() == WL_CONNECTED)
+  if (wifiMulti.run() == WL_CONNECTED)
   {
     delay(1000);
     baliza.setupAPIConeccion();

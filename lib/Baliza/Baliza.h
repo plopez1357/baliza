@@ -1,5 +1,5 @@
 #ifndef Baliza_h
-#define BAliza_h
+#define Baliza_h
 
 #include <Arduino.h>
 
