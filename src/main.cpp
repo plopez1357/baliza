@@ -11,22 +11,19 @@ WiFiMulti wifiMulti;*/
 
 Baliza baliza;
 
-void setup()
-{
-  Serial.begin(9600);
+void setup() {
+  Serial.begin(115200);
   baliza.setupWiFi();
+  baliza.connectToCIServer();
 }
 
-void loop()
-{
-  if (WiFi.status() == WL_CONNECTED)
-  //if (wifiMulti.run() == WL_CONNECTED)
-  {
+void loop() {
+  // if (wifiMulti.run() == WL_CONNECTED)
+  if (WiFi.status() == WL_CONNECTED){
     delay(1000);
     baliza.setupAPIConeccion();
     baliza.checkAPIStatus();
-  }else
-  {
+  }else{
     delay(500);
     Serial.println("NO SE PUDO CONECTAR A WIFI");
     baliza.wifiDisconnected();

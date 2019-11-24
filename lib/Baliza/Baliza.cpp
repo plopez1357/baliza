@@ -13,24 +13,24 @@ Led yellowLed(19);
 Led greenLed(21);
 Led orangeLed(18);
 
-Baliza::Baliza()
-{  
+Baliza::Baliza(){}
+
+void Baliza::connectToCIServer(){
+    apiService.connectToAPI();
 }
 
-void Baliza::setupWiFi() 
-{
+void Baliza::setupWiFi(){
     wifiConnecion.wifiSetup();
 }
 
 // I9aFEbTHtAB7uCiJ0T-MTA
 // lnyoitp6IOciC01Dcp0Lbg
-void Baliza::setupAPIConeccion()
-{
-    apiService.connectToAPI("https://api.travis-ci.org", "lnyoitp6IOciC01Dcp0Lbg");
+// https://api.travis-ci.org
+void Baliza::setupAPIConeccion(){
+    apiService.setCredentials();
 }
 
-void Baliza::checkAPIStatus()
-{   
+void Baliza::checkAPIStatus(){   
     String state = apiService.getState();
 
     if(state.equals("passed")){
@@ -46,48 +46,42 @@ void Baliza::checkAPIStatus()
     }
 }
 
-void Baliza::startedBuild() 
-{
+void Baliza::startedBuild(){
     yellowLed.turnOff();
     redLed.turnOff();
     orangeLed.turnOff();
     greenLed.blink();
 }
 
-void Baliza::passedBuild() 
-{
+void Baliza::passedBuild(){
     yellowLed.turnOff();
     redLed.turnOff();
     orangeLed.turnOff();
     greenLed.turnOn();
 }
 
-void Baliza::failedBuild()
-{
+void Baliza::failedBuild(){
     greenLed.turnOff();
     yellowLed.turnOff();
     orangeLed.turnOff();
     redLed.turnOn();
 }
 
-void Baliza::httpConnectionError()
-{
+void Baliza::httpConnectionError(){
     greenLed.turnOff();
     redLed.turnOff();
     orangeLed.turnOff();
     yellowLed.turnOn();
 }
 
-void Baliza::wifiDisconnected()
-{
+void Baliza::wifiDisconnected(){
     greenLed.turnOff();
     redLed.turnOff();
     yellowLed.turnOff();
     orangeLed.turnOn();
 }
 
-void Baliza::turnOffLeds()
-{
+void Baliza::turnOffLeds(){
     greenLed.turnOff();
     redLed.turnOff();
     yellowLed.turnOff();
