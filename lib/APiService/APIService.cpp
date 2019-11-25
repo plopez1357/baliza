@@ -25,6 +25,14 @@ void APIService::setHeader()
   http.addHeader("Authorization","token " + _authorizationToken);
 }  
 
+String APIService::findStateOfTheJson(String json)
+{
+  StaticJsonBuffer <4500> jsonBuffer;
+  JsonObject& root = jsonBuffer.parseObject(json);
+  String state = root["builds"][0]["state"];
+  return state;
+}
+
 String APIService::getState()
 {
   setHeader();
@@ -35,11 +43,8 @@ String APIService::getState()
     Serial.printf("[HTTP] GET... code: %d\n", httpCode);
     // file found at server
     if(httpCode == HTTP_CODE_OK){
-      // get the value of "state"
       String json = http.getString();
-      StaticJsonBuffer <4000> jsonBuffer;
-      JsonObject& root = jsonBuffer.parseObject(json);
-      String status = root["builds"][0]["state"];  
+      String status =  findStateOfTheJson(json);
       Serial.println(status);
       return status;
     }else{

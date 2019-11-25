@@ -9,6 +9,7 @@ class APIService
         APIService();
         void connectToAPI(String urlOfBuild, String authorizationToken);
         String getState();
+        String findStateOfTheJson(String json);
     private:
         String _urlOfBuild;
         String _authorizationToken;
