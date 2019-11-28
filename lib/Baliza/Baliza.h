@@ -16,6 +16,7 @@ class Baliza
         void httpConnectionError();
         void wifiDisconnected();
         void turnOffLeds();
+        void connectToCIServer();
 };
 
 #endif
