@@ -11,7 +11,7 @@ APIService apiService;
 Led redLed(5);
 Led yellowLed(19);
 Led greenLed(21);
-Led orangeLed(18);
+Led orangeLed(16);
 
 Baliza::Baliza(){}
 
