@@ -5,7 +5,6 @@
 #include <ArduinoJson.h>
 #include <Baliza.h>
 #include <WiFi.h>
-#include <HTTPClient.h>
 
 // void setUp(void) {
 // }
@@ -19,7 +18,6 @@ int yellowLedTest = 19;
 int orangeLedTest = 16;
 
 Baliza balizaTest;
-HTTPClient httpTest;
 
 String jsonPassed = R"rawliteral(
     {
