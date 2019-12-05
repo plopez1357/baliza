@@ -8,10 +8,11 @@
 // Settings
 WiFiConnection wifiConnecion;
 APIService apiService;
-Led redLed(5);
-Led yellowLed(19);
-Led greenLed(21);
+Led redLed(21);
+// Led blueLed(19);
+Led greenLed(5);
 Led orangeLed(16);
+Led yellowLed(15);
 
 Baliza::Baliza(){}
 

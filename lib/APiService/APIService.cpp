@@ -17,9 +17,9 @@ void APIService::connectToAPI() {
   this->startSPIFFS();
   Serial.println("Ingresar a esta IP para colocar las credenciales");
   Serial.print("IP Address: ");
-  Serial.println(WiFi.localIP());
+  Serial.println(WiFi.localIP() +":81");
   Serial.println("");
-  delay(5000);
+  delay(10000);
   server1.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
     request->send(200, "text/html", INDEX_HTML);
   });

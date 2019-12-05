@@ -12,9 +12,9 @@
 // void tearDown(void) {
 // }
 
-int redLedTest = 5;
-int greenLedTest = 21;
-int yellowLedTest = 19;
+int redLedTest = 21;
+int greenLedTest = 5;
+int yellowLedTest = 15;
 int orangeLedTest = 16;
 
 Baliza balizaTest;
