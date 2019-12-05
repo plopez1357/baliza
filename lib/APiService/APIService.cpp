@@ -15,9 +15,13 @@ APIService::APIService(){}
 
 void APIService::connectToAPI() {
   this->startSPIFFS();
+  Serial.println("");
+  Serial.println("");
   Serial.println("Ingresar a esta IP para colocar las credenciales");
   Serial.print("IP Address: ");
-  Serial.println(WiFi.localIP() +":81");
+  Serial.print(WiFi.localIP());
+  Serial.print(":81");
+  Serial.println("");
   Serial.println("");
   delay(10000);
   server1.on("/", HTTP_GET, [](AsyncWebServerRequest *request){
@@ -84,9 +88,10 @@ void APIService::setCredentials() {
 void APIService::setHeader() {
   Serial.print("[HTTP] begin...\n");
   // configure traged server and url
+  // /repo/26882066/builds?limit=1
   // 26882066 jorocha
   // 26853908 plopez1357
-  http.begin(_urlOfBuild + "/repo/26853908/builds?limit=1");
+  http.begin(_urlOfBuild);
   http.addHeader("Travis-API-Version","3");
   http.addHeader("User-Agent","API Explorer");
   http.addHeader("Authorization","token " + _authorizationToken);
