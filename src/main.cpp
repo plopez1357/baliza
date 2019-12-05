@@ -24,7 +24,7 @@ void loop() {
     baliza.setupAPIConeccion();
     baliza.checkAPIStatus();
   }else{
-    delay(500);
+    delay(1000);
     Serial.println("NO SE PUDO CONECTAR A WIFI");
     baliza.wifiDisconnected();
   }
